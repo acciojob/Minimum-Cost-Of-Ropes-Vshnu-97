@@ -1,17 +1,19 @@
-const express = require('express');
-const path = require('path');
+function minimumCost() {
+    
+    var res = 0;
+    var cost = 0;
+    var inputArray = document.getElementById("inputArr").value;
+    inputArray = inputArray.split(',').map(Number);
+    for (let i = 0; i < inputArray.length - 1; i += 0) {
+        if (inputArray.length == 0) break;
+        inputArray = inputArray.sort((a,b) => b-a);
+        res = inputArray.pop() + inputArray.pop();
+        cost += res;
+        inputArray[inputArray.length] = res;
+       
+        
+    }
 
-const app = express();
-
-app.use(express.static(__dirname))
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/main.html'));
-});
-//your code here
-app.post('/add', (req, res) => {
-  const {a,b} = req.body;
-  res.status(200).send(a+b);
-  // res.sendFile(path.join(__dirname + '/main.html'));
-});
-module.exports = app;
+    
+    document.getElementById("result").innerHTML = cost;
+}
